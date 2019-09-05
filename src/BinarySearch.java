@@ -5,7 +5,7 @@ import java.util.Map;
  */
 public class BinarySearch {
     /**
-     * 传送门：https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/description/?utm_source=LCUS&utm_medium=ip_redirect_q_uns&utm_campaign=transfer2china
+     * 传送门：https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/
      * 题解：二分，l,r分别指向数组头尾，若sum = numbers[l] + numbers[r]的结果小了，则让l向前走，来增加sum的值，反之，则让r向前走，来减小sum的值，直到sum = target。
      * @param numbers
      * @param target
@@ -27,7 +27,7 @@ public class BinarySearch {
     }
 
     /**
-     * 传送门：https://leetcode.com/problems/sum-of-square-numbers/description/
+     * 传送门：https://leetcode.com/problems/sum-of-square-numbers/
      * 题解：二分，l,r分别指向0和c的平方根，若mid = l*l + r*r的结果小了，则让l向前走，来增加mid的值，反之，则让r向前走，来减小mid的值，直到mid = c。
      * @param c
      * @return
@@ -45,5 +45,36 @@ public class BinarySearch {
                 r--;
         }
         return false;
+    }
+
+    /**
+     * 传送门https://leetcode.com/problems/valid-palindrome-ii/
+     * 题解：二分，
+     * @param s
+     * @return
+     */
+    public boolean validPalindrome(String s) {
+        int l = 0;
+        int r = s.length()-1;
+        while(l < r) {
+            if(s.charAt(l) != s.charAt(r)) {
+                return isPalindrome(s, l, r-1) || isPalindrome(s, l+1, r);
+            } else {
+                l++;    r--;
+            }
+        }
+        return true;
+    }
+
+    public boolean isPalindrome(String s, int l, int r) {
+        while(l < r) {
+            if(s.charAt(l) != s.charAt(r)) {
+                return false;
+            } else {
+                l++;
+                r--;
+            }
+        }
+        return true;
     }
 }
